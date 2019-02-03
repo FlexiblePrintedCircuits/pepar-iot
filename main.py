@@ -25,7 +25,7 @@ app = Flask(__name__)
 #     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
 #     sys.exit(1)
 
-line_bot_api = LineBotApi('KFwpfQ+ftxQRMW7yANM+tJSr2c2v/pEyI4w8hViLr9Yfe8o6KohebcwjZHB79Kk+2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV9dBatRCr9uR246Dqm6TTyxosRKlMP/SyQxrJ9xC9mxjAdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('DqUsUzaNE1qSjeqMYKAVKTnO1DFw2nnE/MvvgQp8cI8WZOCuhi8Hemr8LUcpwX5X2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV8jEDQOTc2OWK00eBenWnoDFJNrRT0e0KzOvbv4qdBRoAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('3df819265eae58584bb90f44c95c07ce')
 
 @app.route("/")
