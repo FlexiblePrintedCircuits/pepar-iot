@@ -1,3 +1,4 @@
+#coding:utf-8
 import os
 import sys
 from flask import Flask, request, abort, send_file
@@ -11,6 +12,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, LocationMessage, MessageImagemapAction, ImagemapArea, ImagemapSendMessage, BaseSize, LocationSendMessage
 )
+import requests
 
 app = Flask(__name__)
 
