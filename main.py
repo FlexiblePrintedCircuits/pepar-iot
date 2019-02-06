@@ -14,9 +14,9 @@ import os
 app = Flask(__name__)
 
 #LINE Access Token
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ["3df819265eae58584bb90f44c95c07ce"]
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ["AJ03tYuaMQXQNXojwbdDSah6XbwAYtpISFrGz7T8A6tVgmRL6wMt3Q2W5qdAPWXY2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV+ooBQ61n0LFbpWjsTxl2X36qIN9x8sCk/xoIesLy7fhQdB04t89/1O/w1cDnyilFU="]
 #LINE Channel Secret
-YOUR_CHANNEL_SECRET = os.environ["KFwpfQ+ftxQRMW7yANM+tJSr2c2v/pEyI4w8hViLr9Yfe8o6KohebcwjZHB79Kk+2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV9dBatRCr9uR246Dqm6TTyxosRKlMP/SyQxrJ9xC9mxjAdB04t89/1O/w1cDnyilFU="]
+YOUR_CHANNEL_SECRET = os.environ["1a78827b03d52b212fbea6a431718d18"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
