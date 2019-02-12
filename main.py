@@ -11,7 +11,7 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
 line_bot_api = LineBotApi('fN9eTrok5OB5/jnV2iS7CIuJky0xfG39XXY5ftvbPMFiglJE8m9RA4X5UI3VPuvi2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV/0UbvWSbIfAwl4RHYOQg0I79awhL9fbRJ0j5/HEQmaewdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('1a78827b03d52b212fbea6a431718d18')
@@ -36,6 +36,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    print("aa")
     if event.type == "message":
         if (event.message.text == "あ"):
             line_bot_api.reply_message(
@@ -46,6 +47,6 @@ def handle_message(event):
             )
 
 if __name__ == "__main__":
-    #app.run()
-    port = int(os.getenv("PORT"))
-    app.run(host="0.0.0.0", port=port)
+    app.run()
+    #port = int(os.getenv("PORT"))
+    #app.run(host="0.0.0.0", port=port)
