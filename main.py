@@ -59,33 +59,33 @@ def make_image_message(PeparDis):
 
     if (PeparDis <= 50) and (PeparDis > 40):
         messages = ImageSendMessage(
-            original_content_url="https://Pepar50m.png",
-            preview_image_url="https://Pepar50m.png"
+            original_content_url="https://Pepar50m.jpg",
+            preview_image_url="https://Pepar50m.jpg"
         )
     elif (PeparDis <= 40) and (PeparDis > 30):
         messages = ImageSendMessage(
-            original_content_url="https://Pepar40m.png",
-            preview_image_url="https://Pepar40m.png"
+            original_content_url="https://Pepar40m.jpg",
+            preview_image_url="https://Pepar40m.jpg"
         )
     elif (PeparDis <= 30) and (PeparDis > 20):
         messages = ImageSendMessage(
-            original_content_url="https://Pepar30m.png",
-            preview_image_url="https://Pepar30m.png"
+            original_content_url="https://Pepar30m.jpg",
+            preview_image_url="https://Pepar30m.jpg"
         )
     elif (PeparDis <= 20) and (PeparDis > 10):
         messages = ImageSendMessage(
-            original_content_url="https://Pepar20m.png",
-            preview_image_url="https://Pepar20m.png"
+            original_content_url="https://Pepar20m.jpg",
+            preview_image_url="https://Pepar20m.jpg"
         )
     elif (PeparDis <= 10) and (PeparDis > 0):
         messages = ImageSendMessage(
-            original_content_url="https://Pepar10m.png",
-            preview_image_url="https://Pepar10m.png"
+            original_content_url="https://Pepar10m.jpg",
+            preview_image_url="https://Pepar10m.jpg"
         )
     elif (PeparDis <= 10):
         messages = ImageSendMessage(
-            original_content_url="https://Pepar0m.png",
-            preview_image_url="https://Pepar0m.png"
+            original_content_url="https://Pepar0m.jpg",
+            preview_image_url="https://Pepar0m.jpg"
         )
 
     return messages
