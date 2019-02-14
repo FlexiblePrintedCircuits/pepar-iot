@@ -54,8 +54,6 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
-
 def make_image_message(PeparDis):
     global messages
 
@@ -92,6 +90,7 @@ def make_image_message(PeparDis):
 
     return messages
 
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.type == "message":
         if (event.message.text == "あとどれぐらい？"):
