@@ -67,6 +67,13 @@ def handle_message(event):
                     TextSendMessage(text=SendMes)
                 ]
             )
+        if (event.message.text == "あ"):
+            line_bot_api.reply_message(
+                event.reply_token,
+                [
+                    TextSendMessage(text="あ")
+                ]
+            )
 
 if __name__ == "__main__":
     #app.run()
