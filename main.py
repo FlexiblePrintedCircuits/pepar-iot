@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,
 )
 import os
 import imaplib
@@ -55,16 +55,55 @@ def callback():
     return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
+
+def make_image_message(PeparDis):
+    global messages
+
+    if (PeparDis <= 50) and (PeparDis > 40):
+        messages = ImageSendMessage(
+            original_content_url="Pepar50m.png",
+            preview_image_url="Pepar50m.png"
+        )
+    elif (PeparDis <= 40) and (PeparDis > 30):
+        messages = ImageSendMessage(
+            original_content_url="Pepar40m.png",
+            preview_image_url="Pepar40m.png"
+        )
+    elif (PeparDis <= 30) and (PeparDis > 20):
+        messages = ImageSendMessage(
+            original_content_url="Pepar30m.png",
+            preview_image_url="Pepar30m.png"
+        )
+    elif (PeparDis <= 20) and (PeparDis > 10):
+        messages = ImageSendMessage(
+            original_content_url="Pepar20m.png",
+            preview_image_url="Pepar20m.png"
+        )
+    elif (PeparDis <= 10) and (PeparDis > 0):
+        messages = ImageSendMessage(
+            original_content_url="Pepar10m.png",
+            preview_image_url="Pepar10m.png"
+        )
+    elif (PeparDis <= 10):
+        messages = ImageSendMessage(
+            original_content_url="Pepar0m.png",
+            preview_image_url="Pepar0m.png"
+        )
+
+    return messages
+
 def handle_message(event):
     if event.type == "message":
         if (event.message.text == "あとどれぐらい？"):
             SendMes = GetMail()
+            SendImage = make_image_message(SendMes)
             SendMes = str(SendMes)
             SendMessage = ("あと" + SendMes + "mです！")
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text=SendMessage)
+                    TextSendMessage(text=SendMessage),
+                    messages
                 ]
             )
         if (event.message.text == "あ"):
