@@ -139,9 +139,12 @@ def handle_message(event):
                     TextSendMessage(text="あ")
                 ]
             )
+        if (event.message.text == "死ね") or (event.message.text == "しね"):
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="お前がしね"))
 
 if __name__ == "__main__":
     #環境によるがapp.run()だけでは動かなかったはず
     #ローカル環境で動いてもherokuで動くとは限らないのでポートを指定する
+    #２月１９日夕方４時
     port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
