@@ -54,11 +54,6 @@ def GetMail():
     Intmaintext=int(Strmaintext, 16)
     return Intmaintext
 
-while True:
-    global PeparDiscount
-    PeparDiscount = GetMail()
-    sleep(60)
-
 @app.route("/callback", methods=['POST'])
 #この辺はコピペやから何をやっとるかよく分からん
 def callback():
@@ -124,10 +119,10 @@ def make_image_message(PeparDis):
 def handle_message(event):
     if event.type == "message":
         if (event.message.text == "あとどれぐらい？"):
-            #SendMes = GetMail()
-            SendImage = make_image_message(PeparDiscount)
-            SendMes = str(PeparDiscount)
-            SendMessage = ("あと" + PeparDiscount + "mです！")
+            SendMes = GetMail()
+            SendImage = make_image_message(SendMes)
+            SendMes = str(SendMes)
+            SendMessage = ("あと" + SendMes + "mです！")
             line_bot_api.reply_message(
                 event.reply_token,
                 [
