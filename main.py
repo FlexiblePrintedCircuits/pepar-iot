@@ -18,6 +18,7 @@ from linebot.models import (
 import os
 import imaplib
 import email
+from time import sleep
 
 app = Flask(__name__)
 app.debug = False
@@ -32,6 +33,11 @@ mail=imaplib.IMAP4_SSL('imap.gmail.com',993)
 mail.login('pepariot@gmail.com','Hogehoge@114514')
 mail.select('inbox')
 type,data=mail.search(None,'ALL')
+
+while True:
+    global PeparDiscount
+    PeparDiscount = GetMail()
+    sleep(60)
 
 def GetMail():
     #Gmailを取得する関数
@@ -118,10 +124,10 @@ def make_image_message(PeparDis):
 def handle_message(event):
     if event.type == "message":
         if (event.message.text == "あとどれぐらい？"):
-            SendMes = GetMail()
-            SendImage = make_image_message(SendMes)
-            SendMes = str(SendMes)
-            SendMessage = ("あと" + SendMes + "mです！")
+            #SendMes = GetMail()
+            SendImage = make_image_message(PeparDiscount)
+            SendMes = str(PeparDiscount)
+            SendMessage = ("あと" + PeparDiscount + "mです！")
             line_bot_api.reply_message(
                 event.reply_token,
                 [
