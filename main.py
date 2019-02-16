@@ -34,11 +34,6 @@ mail.login('pepariot@gmail.com','Hogehoge@114514')
 mail.select('inbox')
 type,data=mail.search(None,'ALL')
 
-while True:
-    global PeparDiscount
-    PeparDiscount = GetMail()
-    sleep(60)
-
 def GetMail():
     #Gmailを取得する関数
     for i in data[0].split():
@@ -58,6 +53,11 @@ def GetMail():
     #取得した１６進文字列を数値型１０進に変換
     Intmaintext=int(Strmaintext, 16)
     return Intmaintext
+
+while True:
+    global PeparDiscount
+    PeparDiscount = GetMail()
+    sleep(60)
 
 @app.route("/callback", methods=['POST'])
 #この辺はコピペやから何をやっとるかよく分からん
