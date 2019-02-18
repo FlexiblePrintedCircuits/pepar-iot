@@ -34,6 +34,8 @@ mail.login('pepariot@gmail.com','Hogehoge@114514')
 mail.select('inbox')
 type,data=mail.search(None,'ALL')
 
+global GetPeparDis
+
 def GetMail():
     #Gmailを取得する関数
     for i in data[0].split():
@@ -53,6 +55,25 @@ def GetMail():
     #取得した１６進文字列を数値型１０進に変換
     Intmaintext=int(Strmaintext, 16)
     return Intmaintext
+
+def GetConstantMail():
+    #定期的にGmailを取得する関数
+    for i in data[0].split():
+        #受信しているメール取得
+        #文字コードはiso-2022-jp
+        ok,x=mail.fetch(i,'RFC822')
+        ms=email.message_from_string(x[0][1].decode('iso-2022-jp'))
+
+        #メールの内容だけを取得
+        maintext=ms.get_payload()
+        GetPeparDis=str(maintext)
+
+    #最新のメールだけ欲しいので、最後の２文字を取得
+    #データは１６進文字列で取得される
+    GetPeparDis = GetPeparDis[-6:-4]
+    #取得した１６進文字列を数値型１０進に変換
+    IntPeparDis = int(GetPeparDis, 16)
+    return IntPeparDis
 
 @app.route("/callback", methods=['POST'])
 #この辺はコピペやから何をやっとるかよく分からん
@@ -139,12 +160,19 @@ def handle_message(event):
                     TextSendMessage(text="あ")
                 ]
             )
-        if (event.message.text == "死ね") or (event.message.text == "しね"):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="お前がしね"))
+        if (event.message.text == "Send Toilet Pepar"):
+            GetIntPeparDis = GetConstantMail()
+            if (GetIntPeparDis <= 20):
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    [
+                        TestSendMassage(text="あと２０ｍ以下になりました！早めの補充を！")
+                    ]
+            )
 
 if __name__ == "__main__":
     #環境によるがapp.run()だけでは動かなかったはず
     #ローカル環境で動いてもherokuで動くとは限らないのでポートを指定する
-    #２月１９日夕方４時
+    #２月22の１０時半
     port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
