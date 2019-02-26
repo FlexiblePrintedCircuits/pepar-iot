@@ -108,33 +108,37 @@ def make_image_message(PeparDis):
             original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214183132.jpg",
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214183132.jpg"
         )
+        return messages
     elif (PeparDis <= 40) and (PeparDis > 30):
         messages = ImageSendMessage(
             original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182919.jpg",
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182919.jpg"
         )
+        return messages
     elif (PeparDis <= 30) and (PeparDis > 20):
         messages = ImageSendMessage(
             original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182922.jpg",
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182922.jpg"
         )
+        return messages
     elif (PeparDis <= 20) and (PeparDis > 10):
         messages = ImageSendMessage(
             original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182925.jpg",
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182925.jpg"
         )
+        return messages
     elif (PeparDis <= 10) and (PeparDis > 0):
         messages = ImageSendMessage(
             original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182927.jpg",
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182927.jpg"
         )
+        return messages
     elif (PeparDis <= 10):
         messages = ImageSendMessage(
             original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182930.jpg",
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182930.jpg"
         )
-
-    return messages
+        return messages
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
