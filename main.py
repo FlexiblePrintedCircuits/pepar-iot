@@ -99,7 +99,7 @@ def make_image_message(PeparDis):
     #画像ファイルはpngでなくjpeg形式
     #画像サイズにも制約があるが忘れた。調べてくれ。
 
-    global messages = None
+    global messages
 
     #original_content_urlは、送信した画像をタッチしたら開く画像
     #preview_image_urlは、送信したら勝手に見える画像のプレビュー
