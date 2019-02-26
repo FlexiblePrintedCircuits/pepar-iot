@@ -179,4 +179,6 @@ if __name__ == "__main__":
     #ローカル環境で動いてもherokuで動くとは限らないのでポートを指定する
     #２月22の１０時半
     port = int(os.getenv("PORT"))
-    app.run(host="0.0.0.0", port=port)
+    app.host = "0.0.0.0"
+    app.port = port
+    app.run()
