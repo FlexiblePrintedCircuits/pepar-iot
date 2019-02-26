@@ -21,6 +21,8 @@ import email
 from time import sleep
 
 app = Flask(__name__)
+app.host = "0.0.0.0"
+app.port = int(os.getenv("PORT"))
 app.debug = False
 #Flaskではデフォルトでデバッグモードがオンなので、デバッグデバッグモードをオフにする
 
@@ -178,7 +180,7 @@ if __name__ == "__main__":
     #環境によるがapp.run()だけでは動かなかったはず
     #ローカル環境で動いてもherokuで動くとは限らないのでポートを指定する
     #２月22の１０時半
-    port = int(os.getenv("PORT"))
-    app.host = "0.0.0.0"
-    app.port = port
+    #port = int(os.getenv("PORT"))
+    #app.host = "0.0.0.0"
+    #app.port = port
     app.run()
