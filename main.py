@@ -151,7 +151,8 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text=SendMessage), SendImage
+                    TextSendMessage(text=SendMessage),
+                    messages
                 ]
             )
         if (event.message.text == "あ"):
