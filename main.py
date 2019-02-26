@@ -151,9 +151,7 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text=SendMessage),
-                    #make_image_message関数ですでに送信までのプロセスが指定されてるからmessageだけで画像が送れる。
-                    messages
+                    TextSendMessage(text=SendMessage), messages
                 ]
             )
         if (event.message.text == "あ"):
