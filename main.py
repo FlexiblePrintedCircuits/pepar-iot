@@ -18,7 +18,6 @@ from linebot.models import (
 import os
 import imaplib
 import email
-import requests
 from time import sleep
 
 app = Flask(__name__)
@@ -57,13 +56,15 @@ def GetMail():
     Intmaintext=int(Strmaintext, 16)
     return Intmaintext
 
-'''@app.route("/", methods=['POST'])
+@app.route("/", methods=['POST'])
 def webhook():
     PeparDate = request.date[0:2]
     IntPeparDate = int(PeparDate, 16)
 
     if (IntPeparDate <= 10):
-        user_id = ""'''
+        user_id = "Ue8baeea0f29de588e397c74e7b3dcf31"
+        PushMes = TextSendMessage(text="トイレットペーパーが残り少なくなっています！早めの補充を！")
+        line_bot_api.push_message(user_id, messages=PushMes)
 
 
 
@@ -71,10 +72,10 @@ def webhook():
 #この辺はコピペやから何をやっとるかよく分からん
 def callback():
     # get X-Line-Signature header value
-    signature = requests.headers['X-Line-Signature']
+    signature = request.headers['X-Line-Signature']
 
     # get request body as text
-    body = requests.get_data(as_text=True)
+    body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
     # handle webhook body
