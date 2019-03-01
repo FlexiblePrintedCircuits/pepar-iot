@@ -18,7 +18,7 @@ from linebot.models import (
 import os
 import imaplib
 import email
-import request
+#import request
 from time import sleep
 
 app = Flask(__name__)
