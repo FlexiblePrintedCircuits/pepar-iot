@@ -18,7 +18,7 @@ from linebot.models import (
 import os
 import imaplib
 import email
-#import request
+import requests
 from time import sleep
 
 app = Flask(__name__)
@@ -71,10 +71,10 @@ def webhook():
 #この辺はコピペやから何をやっとるかよく分からん
 def callback():
     # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+    signature = requests.headers['X-Line-Signature']
 
     # get request body as text
-    body = request.get_data(as_text=True)
+    body = requests.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
     # handle webhook body
