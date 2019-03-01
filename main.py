@@ -18,6 +18,7 @@ from linebot.models import (
 import os
 import imaplib
 import email
+import request
 from time import sleep
 
 app = Flask(__name__)
@@ -56,24 +57,15 @@ def GetMail():
     Intmaintext=int(Strmaintext, 16)
     return Intmaintext
 
-def GetConstantMail():
-    #定期的にGmailを取得する関数
-    for i in data[0].split():
-        #受信しているメール取得
-        #文字コードはiso-2022-jp
-        ok,x=mail.fetch(i,'RFC822')
-        ms=email.message_from_string(x[0][1].decode('iso-2022-jp'))
+'''@app.route("/", methods=['POST'])
+def webhook():
+    PeparDate = request.date[0:2]
+    IntPeparDate = int(PeparDate, 16)
 
-        #メールの内容だけを取得
-        maintext=ms.get_payload()
-        GetPeparDis=str(maintext)
+    if (IntPeparDate <= 10):
+        user_id = ""'''
 
-    #最新のメールだけ欲しいので、最後の２文字を取得
-    #データは１６進文字列で取得される
-    GetPeparDis = GetPeparDis[-6:-4]
-    #取得した１６進文字列を数値型１０進に変換
-    IntPeparDis = int(GetPeparDis, 16)
-    return IntPeparDis
+
 
 @app.route("/callback", methods=['POST'])
 #この辺はコピペやから何をやっとるかよく分からん
@@ -147,7 +139,7 @@ def handle_message(event):
             SendMes = GetMail()
             SendImage = make_image_message(SendMes)
             SendMes = str(SendMes)
-            SendMessage = ("あと" + SendMes + "mです！")
+            SendMessage = ("あと" + SendMes + "cmです！")
             line_bot_api.reply_message(
                 event.reply_token,
                 [
@@ -155,22 +147,13 @@ def handle_message(event):
                     messages
                 ]
             )
-        if (event.message.text == "あ"):
+        if (event.message.text == "ユーザーIDを教えて"):
             #これはテスト用。特に意味はない
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text="あ")
+                    TextSendMessage(text=event.source.user_id)
                 ]
-            )
-        if (event.message.text == "Send Toilet Pepar"):
-            GetIntPeparDis = GetConstantMail()
-            if (GetIntPeparDis <= 20):
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    [
-                        TestSendMassage(text="あと２０ｍ以下になりました！早めの補充を！")
-                    ]
             )
 
 if __name__ == "__main__":
