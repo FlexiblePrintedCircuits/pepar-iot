@@ -151,17 +151,19 @@ def make_image_message(PeparDis):
 def handle_message(event):
     if event.type == "message":
         if (event.message.text == "あとどれぐらい？"):
-            SendMes = GetMail()
-            SendImage = make_image_message(SendMes)
-            SendMes = str(SendMes)
-            SendMessage = ("あと" + SendMes + "m以下です！")
-            line_bot_api.reply_message(
-                event.reply_token,
-                [
-                    TextSendMessage(text=SendMessage),
-                    messages
-                ]
-            )
+            while(1):
+                SendMes = GetMail()
+                SendImage = make_image_message(SendMes)
+                SendMes = str(SendMes)
+                SendMessage = ("あと" + SendMes + "m以下です！")
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    [
+                        TextSendMessage(text=SendMessage),
+                        messages
+                        ]
+                )
+                break
         if (event.message.text == "ユーザーIDを教えて"):
             #これはテスト用。特に意味はない
             line_bot_api.reply_message(
