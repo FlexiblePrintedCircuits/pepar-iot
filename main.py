@@ -28,44 +28,40 @@ app.debug = False
 line_bot_api = LineBotApi('fN9eTrok5OB5/jnV2iS7CIuJky0xfG39XXY5ftvbPMFiglJE8m9RA4X5UI3VPuvi2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV/0UbvWSbIfAwl4RHYOQg0I79awhL9fbRJ0j5/HEQmaewdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('1a78827b03d52b212fbea6a431718d18')
 
-#Gmailログイン
-mail=imaplib.IMAP4_SSL('imap.gmail.com',993)
-mail.login('pepariot@gmail.com','Hogehoge@114514')
-mail.select('inbox')
-type,data=mail.search(None,'ALL')
-
 global GetPeparDis
 
 def GetMail():
-    while(1):
-        #Gmailを取得する関数
-        for i in data[0].split():
-            #受信しているメール取得
-            #文字コードはiso-2022-jp
-            ok,x=mail.fetch(i,'RFC822')
-            ms=email.message_from_string(x[0][1].decode('iso-2022-jp'))
+    mail=imaplib.IMAP4_SSL('imap.gmail.com',993)
+    mail.login('pepariot@gmail.com','Hogehoge@114514')
+    mail.select('inbox')
+    #while(1):
+    for i in data[0].split():
+        #受信しているメール取得
+        #文字コードはiso-2022-jp
+        ok,x=mail.fetch(i,'RFC822')
+        ms=email.message_from_string(x[0][1].decode('iso-2022-jp'))
 
-            #メールの内容だけを取得
-            maintext=ms.get_payload()
-            global Strmaintext
-            Strmaintext=str(maintext)
+        #メールの内容だけを取得
+        maintext=ms.get_payload()
+        global Strmaintext
+        Strmaintext=str(maintext)
 
-            #最新のメールだけ欲しいので、最後の２文字を取得
-            #データは１６進文字列で取得される
-        Strmaintext=Strmaintext[-6:-4]
+        #最新のメールだけ欲しいので、最後の２文字を取得
+        #データは１６進文字列で取得される
+    Strmaintext=Strmaintext[-6:-4]
     #取得した１６進文字列を数値型１０進に変換
-        Intmaintext=int(Strmaintext, 16)
+    Intmaintext=int(Strmaintext, 16)
 
-        if (Intmaintext >= 5):
-            return 10
-        elif (Intmaintext < 5) and (Intmaintext >= 4):
-            return 20
-        elif (Intmaintext < 4) and (Intmaintext >= 3):
-            return 30
-        elif (Intmaintext < 3) and (Intmaintext >= 2):
-            return 40
-        elif (Intmaintext < 2):
-            return 50
+    if (Intmaintext >= 5):
+        return 10
+    elif (Intmaintext < 5) and (Intmaintext >= 4):
+        return 20
+    elif (Intmaintext < 4) and (Intmaintext >= 3):
+        return 30
+    elif (Intmaintext < 3) and (Intmaintext >= 2):
+        return 40
+    elif (Intmaintext < 2):
+        return 50
 
 @app.route("/", methods=['GET'])
 def webhook():
