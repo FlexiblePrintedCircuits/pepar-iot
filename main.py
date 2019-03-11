@@ -37,34 +37,35 @@ type,data=mail.search(None,'ALL')
 global GetPeparDis
 
 def GetMail():
-    #Gmailを取得する関数
-    for i in data[0].split():
-        #受信しているメール取得
-        #文字コードはiso-2022-jp
-        ok,x=mail.fetch(i,'RFC822')
-        ms=email.message_from_string(x[0][1].decode('iso-2022-jp'))
+    while(1):
+        #Gmailを取得する関数
+        for i in data[0].split():
+            #受信しているメール取得
+            #文字コードはiso-2022-jp
+            ok,x=mail.fetch(i,'RFC822')
+            ms=email.message_from_string(x[0][1].decode('iso-2022-jp'))
 
-        #メールの内容だけを取得
-        maintext=ms.get_payload()
-        global Strmaintext
-        Strmaintext=str(maintext)
+            #メールの内容だけを取得
+            maintext=ms.get_payload()
+            global Strmaintext
+            Strmaintext=str(maintext)
 
-    #最新のメールだけ欲しいので、最後の２文字を取得
-    #データは１６進文字列で取得される
-    Strmaintext=Strmaintext[-6:-4]
+            #最新のメールだけ欲しいので、最後の２文字を取得
+            #データは１６進文字列で取得される
+        Strmaintext=Strmaintext[-6:-4]
     #取得した１６進文字列を数値型１０進に変換
-    Intmaintext=int(Strmaintext, 16)
+        Intmaintext=int(Strmaintext, 16)
 
-    if (Intmaintext >= 5):
-        return 10
-    elif (Intmaintext < 5) and (Intmaintext >= 4):
-        return 20
-    elif (Intmaintext < 4) and (Intmaintext >= 3):
-        return 30
-    elif (Intmaintext < 3) and (Intmaintext >= 2):
-        return 40
-    elif (Intmaintext < 2):
-        return 50
+        if (Intmaintext >= 5):
+            return 10
+        elif (Intmaintext < 5) and (Intmaintext >= 4):
+            return 20
+        elif (Intmaintext < 4) and (Intmaintext >= 3):
+            return 30
+        elif (Intmaintext < 3) and (Intmaintext >= 2):
+            return 40
+        elif (Intmaintext < 2):
+            return 50
 
 @app.route("/", methods=['GET'])
 def webhook():
@@ -151,19 +152,17 @@ def make_image_message(PeparDis):
 def handle_message(event):
     if event.type == "message":
         if (event.message.text == "あとどれぐらい？"):
-            while(1):
-                SendMes = GetMail()
-                SendImage = make_image_message(SendMes)
-                SendMes = str(SendMes)
-                SendMessage = ("あと" + SendMes + "m以下です！")
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    [
-                        TextSendMessage(text=SendMessage),
-                        messages
-                        ]
-                )
-                break
+            SendMes = GetMail()
+            SendImage = make_image_message(SendMes)
+            SendMes = str(SendMes)
+            SendMessage = ("あと" + SendMes + "m以下です！")
+            line_bot_api.reply_message(
+                event.reply_token,
+                [
+                    TextSendMessage(text=SendMessage),
+                    messages
+                ]
+            )
         if (event.message.text == "ユーザーIDを教えて"):
             #これはテスト用。特に意味はない
             line_bot_api.reply_message(
