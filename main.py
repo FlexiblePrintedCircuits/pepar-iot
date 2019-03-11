@@ -34,6 +34,8 @@ def GetMail():
     mail=imaplib.IMAP4_SSL('imap.gmail.com',993)
     mail.login('pepariot@gmail.com','Hogehoge@114514')
     mail.select('inbox')
+
+    type,data=mail.search(None,'ALL')
     #while(1):
     for i in data[0].split():
         #受信しているメール取得
