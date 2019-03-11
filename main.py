@@ -162,6 +162,7 @@ def handle_message(event):
                     messages
                 ]
             )
+            break
         if (event.message.text == "ユーザーIDを教えて"):
             #これはテスト用。特に意味はない
             line_bot_api.reply_message(
