@@ -76,8 +76,8 @@ def webhook():
         line_bot_api.push_message(user_id, messages=messages)
 
         messagesImage = ImageSendMessage(
-            original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214183132.jpg",
-            preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214183132.jpg"
+            original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182927.jpg",
+            preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182927.jpg"
         )
         line_bot_api.push_message(user_id, messages=messagesImage)
 
