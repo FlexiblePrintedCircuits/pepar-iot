@@ -24,15 +24,15 @@ app = Flask(__name__)
 app.debug = False
 #Flaskではデフォルトでデバッグモードがオンなので、デバッグデバッグモードをオフにする
 
-#トークンとシリアルなんちゃらを登録
-line_bot_api = LineBotApi('fN9eTrok5OB5/jnV2iS7CIuJky0xfG39XXY5ftvbPMFiglJE8m9RA4X5UI3VPuvi2vUTEKJ4bC0ZPLm9/Ipg/akXtiZORldfra3o2korfV/0UbvWSbIfAwl4RHYOQg0I79awhL9fbRJ0j5/HEQmaewdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('1a78827b03d52b212fbea6a431718d18')
+#トークンとシリアルキーを登録
+line_bot_api = LineBotApi(your_api_token)
+handler = WebhookHandler(your_serial_key)
 
 global GetPeparDis
 
 def GetMail():
     mail=imaplib.IMAP4_SSL('imap.gmail.com',993)
-    mail.login('pepariot@gmail.com','Hogehoge@114514')
+    mail.login(your_email,your_pass)
     mail.select('inbox')
 
     type,data=mail.search(None,'ALL')
@@ -82,7 +82,6 @@ def webhook():
         line_bot_api.push_message(user_id, messages=messagesImage)
 
 @app.route("/callback", methods=['POST'])
-#この辺はコピペやから何をやっとるかよく分からん
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
@@ -139,12 +138,6 @@ def make_image_message(PeparDis):
             preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182927.jpg"
         )
         return messages
-    #elif (PeparDis <= 10):
-    #    messages = ImageSendMessage(
-    #        original_content_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182930.jpg",
-    #        preview_image_url="https://cdn-ak.f.st-hatena.com/images/fotolife/h/hahayata/20190214/20190214182930.jpg"
-    #    )
-    #    return messages
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -173,6 +166,5 @@ def handle_message(event):
 if __name__ == "__main__":
     #環境によるがapp.run()だけでは動かなかったはず
     #ローカル環境で動いてもherokuで動くとは限らないのでポートを指定する
-    #２月22の１０時半
     port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
